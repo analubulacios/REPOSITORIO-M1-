@@ -19,7 +19,16 @@ function counter() {
   otroContador()      // 2
   otroContador()      // 3
    */
+
+  let contador = 0;
+    return function crearcontador(){
+        return ++contador; // esto es igual que decir contador = contador + 1 y luego return contador.
+  };
 }
+
+// const nuevocontador= counter(); 
+
+
 
 function cacheFunction(cb) {
   /*
@@ -27,7 +36,7 @@ function cacheFunction(cb) {
 
   Tu tarea aquí es lograr, mediante un closure, que cacheFunction actúe como una memoria caché para el callback que recibe por parámetro (cb); es decir, que "recuerde" el resultado de cada operación que hace, de manera que, al realizar una operación por segunda vez, se pueda obtener el resultado de esa "memoria" sin tener que efectuar otra vez cálculos que ya se hicieron anteriormente.
 
-  cacheFunction debe retornar una función. Esta función debe aceptar un argumento (arg) e invocar a cb con ese argumento; hecho eso, debe guardar el argumento junto con el resultado de la invocación (tip: usá un objeto donde cada propiedad sea el argumento, y su valor el resultado de la correspondiente invocación a cb) de manera que, la próxima vez que reciba el mismo argumento, no sea necesario volver a invocar a cb, porque el resultado estará guardado en la "memoria caché".
+  cacheFunction debe retornar una función. Esta función debe aceptar un argumento cb(arg) e invocar a cb con ese argumento; hecho eso, debe guardar el argumento junto con el resultado de la invocación (tip: usá un objeto donde cada propiedad sea el argumento, y su valor el resultado de la correspondiente invocación a cb) de manera que, la próxima vez que reciba el mismo argumento, no sea necesario volver a invocar a cb, porque el resultado estará guardado en la "memoria caché".
 
 
   Ejemplo:
@@ -41,6 +50,17 @@ function cacheFunction(cb) {
   squareCache(5)    // no volverá a invocar a square, simplemente buscará en la caché cuál es el resultado de square(5) y lo retornará (tip: si usaste un objeto, podés usar hasOwnProperty) 
 
   */
+
+let cache = {}; // declaro un objeto vacio para ir guardando el chache con una propiedad(argumento)y su valor.
+return function(arg) {
+   if (cache.hasOwnProperty(arg)){
+     return cache[arg] // si lo tiene (true) que lo retorne y sino que lo guarde. 
+  }
+  else {  // si no lo tengo que me lo guarde. 
+    cache[arg]= cb(arg) // 2*2 
+    return cache[arg]; // 4
+  }
+ }
 }
 
 // Bind
@@ -67,8 +87,8 @@ function getNombre() {
   Usando el método bind() guardar, en las dos variables declaradas a continuación, dos funciones que actúen como getNombre pero retornen el nombre del instructor y del alumno, respectivamente.
 */
 
-let getNombreInstructor;
-let getNombreAlumno;
+let getNombreInstructor = getNombre.bind(instructor);
+let getNombreAlumno = getNombre.bind (alumno); 
 
 /*
   Ejercicio 4
@@ -80,9 +100,9 @@ function crearCadena(delimitadorIzquierda, delimitadorDerecha, cadena) {
   return delimitadorIzquierda + cadena + delimitadorDerecha;
 }
 
-let textoAsteriscos;
-let textoGuiones;
-let textoUnderscore;
+let textoAsteriscos = crearCadena.bind(this,"*","*",'Hola');
+let textoGuiones= crearCadena.bind(this,"-","-",'Hola');
+let textoUnderscore=crearCadena.bind(this,"_","_","Hola");
 
 // No modifiquen nada debajo de esta linea
 // --------------------------------
