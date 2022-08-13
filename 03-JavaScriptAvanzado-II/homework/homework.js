@@ -26,7 +26,7 @@ function counter() {
   };
 }
 
-// const nuevocontador= counter(); 
+// const nuevocontador= counter(); // de esta manera invoco la funcion grande, mediante la declaracion de una variable. 
 
 
 
@@ -51,14 +51,14 @@ function cacheFunction(cb) {
 
   */
 
-let cache = {}; // declaro un objeto vacio para ir guardando el chache con una propiedad(argumento)y su valor.
-return function(arg) {
-   if (cache.hasOwnProperty(arg)){
+let cache = {}; // declaro un objeto vacio para ir guardando el chache con una propiedad(argumento)y su valor. Donde cada propiedad sea el argumento, y su valor el resultado de la correspondiente invocación a cb)
+return function(arg) { // como es un closure retorno una funcion 
+   if (cache.hasOwnProperty(arg)){ // 
      return cache[arg] // si lo tiene (true) que lo retorne y sino que lo guarde. 
   }
-  else {  // si no lo tengo que me lo guarde. 
-    cache[arg]= cb(arg) // 2*2 
-    return cache[arg]; // 4
+  else {  // si no lo tengo que me lo guarde en cb. 
+    cache[arg]= cb(arg) //  
+    return cache[arg]; // 
   }
  }
 }
@@ -87,7 +87,7 @@ function getNombre() {
   Usando el método bind() guardar, en las dos variables declaradas a continuación, dos funciones que actúen como getNombre pero retornen el nombre del instructor y del alumno, respectivamente.
 */
 
-let getNombreInstructor = getNombre.bind(instructor);
+let getNombreInstructor = getNombre.bind(instructor); // RECORDAR QUE EL BIND : DEVUELVE UNA FUNCION ASOCIANDO EL THIS CON EL OBJETO QUE QUIERO.
 let getNombreAlumno = getNombre.bind (alumno); 
 
 /*
