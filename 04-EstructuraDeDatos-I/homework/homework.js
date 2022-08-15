@@ -15,9 +15,15 @@ Como ejercicio adicional y completamente opcional, al terminar de resolver este 
 */
 
 function nFactorial(n) {
+if (n === 1 || n === 0) return 1;
+else if (n<0) return 0;
+return n * nFactorial(n-1) // aqui invoco la misma funcion que la creo, es decir HAGO LA RECURSION!! 
 }
 
 function nFibonacci(n) {
+ if (n<0) return 0; // condicion de base donde ya sabemos si nos toca ese numero cual es el resultado. 
+ else if (n===1) return 1;// situacion de base idem arriba. 
+ return nFibonacci (n -1) + nFibonacci (n -2); // se repite la misma funcion para el calculo del n fibonacci. 
 }
 
 /*
@@ -25,13 +31,27 @@ Implementar la clase Queue, sabiendo que es una estructura de tipo FIFO, donde e
   - enqueue: agrega un valor respetando el orden.
   - dequeue: remueve un valor respetando el orden. Retorna undefined cuando la queue está vacía.
   - size: retorna el tamaño (cantidad de elementos) de la queue.
-
-Pueden utilizar class o función constructora.
 */
 
-function Queue() {
-
+function Queue() { 
+this.queue = []
 }
+
+Queue.prototype.enqueue= function(elem) {
+  this.queue.push(elem)
+}
+
+Queue.prototype.dequeue= function() {
+  return this.queue.shift()
+}
+
+Queue.prototype.size= function (){
+  return this.queue.length;
+} 
+
+ 
+
+
 
 // No modifiquen nada debajo de esta linea
 // --------------------------------
