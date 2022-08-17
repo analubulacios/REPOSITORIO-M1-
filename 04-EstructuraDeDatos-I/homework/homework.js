@@ -34,7 +34,7 @@ Implementar la clase Queue, sabiendo que es una estructura de tipo FIFO, donde e
 */
 
 function Queue() { 
-this.queue = []
+this.queue = [];
 }
 
 Queue.prototype.enqueue= function(elem) {
